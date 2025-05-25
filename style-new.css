@@ -1,0 +1,703 @@
+@font-face {
+    font-family: 'Levi Windows';
+    src: url('./fonts/Windows Regular.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: #c0c0c0;
+    --secondary-color: #d4d0c8;
+    --accent-color: #000080;
+    --text-color: #000000;
+    --border-light: #ffffff;
+    --border-dark: #808080;
+    --border-darker: #404040;
+    --background-color: #c0c0c0;
+    --card-background: #c0c0c0;
+    --button-highlight: #ffffff;
+    --button-shadow: #808080;
+    --button-face: #c0c0c0;
+    --button-text: #000000;
+    --window-title: #000080;
+    --window-title-text: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Levi Windows", "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: var(--button-face) var(--button-face);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem;
+    background-image: url('data:image/svg+xml,<svg width="4" height="4" viewBox="0 0 4 4" xmlns="http://www.w3.org/2000/svg"><rect width="4" height="4" fill="%23c0c0c0"/><path d="M0 0h4v4H0z" fill="%23d4d0c8"/></svg>');
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilo de janela do Windows 98 */
+.window {
+    background: var(--card-background);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    box-shadow: 1px 1px 0 0 var(--border-dark);
+    margin-bottom: 1rem;
+}
+
+.window-title {
+    background: linear-gradient(90deg, var(--window-title), var(--accent-color));
+    color: var(--window-title-text);
+    padding: 2px 4px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-content {
+    padding: 1rem;
+}
+
+/* Botões estilo Windows 98 */
+button {
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    padding: 4px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--button-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 75px;
+    justify-content: center;
+}
+
+button:active {
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    padding: 5px 7px 3px 9px;
+}
+
+button i {
+    font-size: 12px;
+}
+
+/* Inputs estilo Windows 98 */
+input, select {
+    background: white;
+    border: 2px solid;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    padding: 4px;
+    font-size: 11px;
+    color: var(--text-color);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    padding: 0;
+    margin: 0 8px 0 0;
+    position: relative;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--button-face);
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    width: 5px;
+    height: 8px;
+    border: 2px solid var(--text-color);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+input[type="checkbox"]:focus {
+    outline: 1px dotted var(--accent-color);
+}
+
+input:focus, select:focus {
+    outline: 1px dotted var(--accent-color);
+}
+
+/* Header Controls */
+.header-controls {
+    composes: window;
+    margin: -2rem -2rem 1rem -2rem;
+    text-align: center;
+    position: relative;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    width: calc(100% + 4rem);
+}
+
+.header-controls h1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--window-title-text);
+    padding: 2px 12px;
+    background: linear-gradient(90deg, var(--window-title), var(--accent-color));
+    border: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 24px;
+    width: 100%;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-right: 2rem;
+    gap: 8px;
+}
+
+.language-selector select {
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    padding: 2px 4px;
+    font-size: 11px;
+    color: var(--button-text);
+    cursor: pointer;
+    min-width: 120px;
+    height: 20px;
+}
+
+.style-selector {
+    display: flex;
+    align-items: center;
+}
+
+.style-selector select {
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    padding: 2px 4px;
+    font-size: 11px;
+    color: var(--button-text);
+    cursor: pointer;
+    min-width: 120px;
+    height: 20px;
+}
+
+/* Profile Controls */
+.profile-controls {
+    composes: window;
+    margin-bottom: 1rem;
+}
+
+.profile-controls .window-title {
+    content: "Profile Management";
+}
+
+.profile-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+#profile-select {
+    min-width: 200px;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Search Box */
+.search-container {
+    composes: window;
+    margin-bottom: 1rem;
+}
+
+.search-container .window-title {
+    content: "Search";
+}
+
+.search-box {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 4px 24px;
+    font-size: 13px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+#clear-search {
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    opacity: 0;
+    font-size: 14px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.search-box input:not(:placeholder-shown) + #clear-search {
+    opacity: 1;
+}
+
+/* Import/Export Controls */
+.import-export-controls {
+    composes: window;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+}
+
+.import-export-controls .window-title {
+    content: "Import/Export";
+}
+
+.import-button {
+    composes: button;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 75px;
+    justify-content: center;
+    cursor: pointer;
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    padding: 4px 8px;
+    font-size: 11px;
+    color: var(--button-text);
+}
+
+.import-button:active {
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    padding: 5px 7px 3px 9px;
+}
+
+#import-input {
+    display: none;
+}
+
+/* Book List */
+#book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1rem;
+    padding: 8px;
+    background: var(--background-color);
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+}
+
+.category-column {
+    background: var(--card-background);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    box-shadow: 1px 1px 0 0 var(--border-dark);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0; /* Previne que a coluna cresça além do espaço disponível */
+}
+
+.category-column h2 {
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--text-color);
+    padding: 4px;
+    background: var(--secondary-color);
+    border: 1px solid;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.category-column h2 i {
+    font-size: 12px;
+    color: var(--accent-color);
+}
+
+.book-card {
+    composes: window;
+    padding: 0;
+    margin: 0;
+    background: var(--card-background);
+    border: 1px solid;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+.book-card .window-title {
+    content: "Book";
+    font-size: 11px;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(90deg, var(--window-title), var(--accent-color));
+    color: var(--window-title-text);
+}
+
+.book-card .window-title i {
+    font-size: 12px;
+}
+
+.book-content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--card-background);
+}
+
+.book-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px;
+    background: var(--card-background);
+}
+
+.book-header i {
+    font-size: 16px;
+    color: var(--accent-color);
+    margin-top: 2px;
+}
+
+.book-title {
+    font-size: 11px;
+    font-weight: bold;
+    flex: 1;
+    color: var(--text-color);
+}
+
+.book-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    background: var(--card-background);
+    border-top: 1px solid var(--border-dark);
+}
+
+.book-skill {
+    font-size: 11px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.book-skill i {
+    font-size: 12px;
+    color: var(--accent-color);
+}
+
+.mark-button {
+    composes: button;
+    min-width: 60px;
+    padding: 2px 8px;
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+}
+
+.mark-button.marked {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--card-background);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    min-width: 300px;
+    box-shadow: 2px 2px 0 0 var(--border-dark);
+}
+
+.modal-content .window-title {
+    background: linear-gradient(90deg, var(--window-title), var(--accent-color));
+    color: var(--window-title-text);
+    padding: 2px 4px;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.modal-message {
+    padding: 16px;
+    font-size: 11px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 8px;
+    background: var(--button-face);
+}
+
+.modal-button {
+    composes: button;
+    min-width: 75px;
+}
+
+/* Footer */
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.footer-content a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .book-card {
+        margin-bottom: 8px;
+    }
+}
+
+#progress-bar-container {
+    margin-bottom: 1rem;
+    padding: 8px;
+    background: var(--card-background);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+}
+
+.progress-bar-outer {
+    width: 100%;
+    height: 20px;
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--window-title), var(--accent-color));
+    transition: width 0.3s ease;
+}
+
+.progress-bar-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-color);
+}
+
+.global-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.global-mark-button, .global-unmark-button, .import-button, #export-button {
+    composes: button;
+    min-width: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+#import-input {
+    display: none;
+}
+
+.import-export-controls {
+    display: none;
+}
+
+.category-progress-bar-container {
+    margin-bottom: 8px;
+    padding: 4px;
+    background: var(--button-face);
+    border: 1px solid;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+.category-progress-bar-outer {
+    width: 100%;
+    height: 16px;
+    background: var(--button-face);
+    border: 1px solid;
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.category-progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--window-title), var(--accent-color));
+    transition: width 0.3s ease;
+}
+
+.category-progress-bar-label {
+    font-size: 10px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.category-buttons {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    background: var(--button-face);
+    border-top: 1px solid var(--border-dark);
+}
+
+.mark-button, .unmark-button {
+    composes: button;
+    min-width: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Scrollbar estilo Windows 98 */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--button-face);
+    border: 1px solid var(--border-darker);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--button-face);
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+::-webkit-scrollbar-button {
+    background: var(--button-face);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-darker) var(--border-darker) var(--border-light);
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-button:hover {
+    background: var(--button-face);
+    border-color: var(--border-darker) var(--border-light) var(--border-light) var(--border-darker);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--button-face);
+    border: 1px solid var(--border-darker);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--button-face) var(--button-face);
+} 

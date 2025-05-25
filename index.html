@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PZ Book Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="header-controls">
+        <h1>PZ Book Tracker</h1>
+        <div class="language-selector">
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="it">Italiano</option>
+                <option value="ru">Русский</option>
+                <option value="zh">中文</option>
+            </select>
+        </div>
+    </div>
+    <div id="progress-bar-container"></div>
+    <div class="profile-controls">
+        <div class="profile-selector">
+            <select id="profile-select">
+                <option value="default">Default Profile</option>
+            </select>
+            <button id="new-profile-button" title="Create new profile">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <div class="profile-actions">
+            <button id="rename-profile-button" title="Rename profile">
+                <i class="fa-solid fa-pen"></i>
+            </button>
+            <button id="delete-profile-button" title="Delete profile">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-input" placeholder="Search books...">
+            <button id="clear-search" title="Clear search">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <div id="book-list"></div>
+    <footer>
+        <div class="footer-content">
+            <span>Created by</span>
+            <a href="https://github.com/glok" target="_blank" rel="noopener noreferrer">Glok</a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
