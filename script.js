@@ -61,7 +61,9 @@ const TRANSLATIONS = {
         of: "of",
         collected: "collected books",
         createdBy: "Created by",
-        language: "Language"
+        language: "Language",
+        noBooksFound: "No books found for this search.",
+        noBooksAvailable: "No books available.",
     },
     pt: {
         title: "Rastreador de Livros PZ",
@@ -94,7 +96,9 @@ const TRANSLATIONS = {
         of: "de",
         collected: "livros coletados",
         createdBy: "Criado por",
-        language: "Idioma"
+        language: "Idioma",
+        noBooksFound: "Nenhum livro encontrado para esta busca.",
+        noBooksAvailable: "Nenhum livro disponível.",
     },
     es: {
         title: "Rastreador de Libros PZ",
@@ -127,7 +131,9 @@ const TRANSLATIONS = {
         of: "de",
         collected: "libros recolectados",
         createdBy: "Creado por",
-        language: "Idioma"
+        language: "Idioma",
+        noBooksFound: "No se encontraron libros para esta búsqueda.",
+        noBooksAvailable: "No hay libros disponibles.",
     },
     fr: {
         title: "Suivi de Livres PZ",
@@ -160,7 +166,9 @@ const TRANSLATIONS = {
         of: "sur",
         collected: "livres collectés",
         createdBy: "Créé par",
-        language: "Langue"
+        language: "Langue",
+        noBooksFound: "Aucun livre trouvé pour cette recherche.",
+        noBooksAvailable: "Aucun livre disponible.",
     },
     it: {
         title: "Tracciatore Libri PZ",
@@ -193,7 +201,9 @@ const TRANSLATIONS = {
         of: "di",
         collected: "libri raccolti",
         createdBy: "Creato da",
-        language: "Lingua"
+        language: "Lingua",
+        noBooksFound: "Nessun libro trovato per questa ricerca.",
+        noBooksAvailable: "Nessun libro disponibile.",
     },
     ru: {
         title: "Трекер Книг PZ",
@@ -226,7 +236,9 @@ const TRANSLATIONS = {
         of: "из",
         collected: "собранных книг",
         createdBy: "Создано",
-        language: "Язык"
+        language: "Язык",
+        noBooksFound: "Книги не найдены для этого поиска.",
+        noBooksAvailable: "Нет доступных книг.",
     },
     zh: {
         title: "PZ 书籍追踪器",
@@ -259,13 +271,27 @@ const TRANSLATIONS = {
         of: "共",
         collected: "本已收集书籍",
         createdBy: "创建者",
-        language: "语言"
+        language: "语言",
+        noBooksFound: "未找到相关书籍。",
+        noBooksAvailable: "没有可用的书籍。",
     }
 };
 
 const STYLE_KEY = 'book-tracker-style';
 
-let currentLanguage = localStorage.getItem('book-tracker-language') || 'en';
+const SUPPORTED_LANGUAGES = Object.keys(TRANSLATIONS);
+
+function normalizeLanguage(lang) {
+    if (!lang) return 'en';
+    lang = lang.toLowerCase();
+    if (SUPPORTED_LANGUAGES.includes(lang)) return lang;
+    // handle cases like 'pt-BR', 'en-US', etc.
+    const short = lang.split('-')[0];
+    if (SUPPORTED_LANGUAGES.includes(short)) return short;
+    return 'en';
+}
+
+let currentLanguage = normalizeLanguage(localStorage.getItem('book-tracker-language'));
 
 function t(key, params = {}) {
     let text = TRANSLATIONS[currentLanguage][key] || TRANSLATIONS.en[key];
@@ -278,8 +304,8 @@ function t(key, params = {}) {
 }
 
 function setLanguage(lang) {
-    currentLanguage = lang;
-    localStorage.setItem('book-tracker-language', lang);
+    currentLanguage = normalizeLanguage(lang);
+    localStorage.setItem('book-tracker-language', currentLanguage);
     updateUILanguage();
 }
 
@@ -809,10 +835,13 @@ function renderBooks() {
     const columns = document.createElement('div');
     columns.className = 'columns';
     
+    let hasResults = false;
+    
     Object.keys(categories).forEach(category => {
         const filteredBooks = filterBooks(categories[category]);
         if (filteredBooks.length === 0) return;
         
+        hasResults = true;
         const col = document.createElement('div');
         col.className = 'category-column';
         const header = document.createElement('h2');
@@ -848,7 +877,18 @@ function renderBooks() {
         
         columns.appendChild(col);
     });
-    container.appendChild(columns);
+
+    if (!hasResults) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state visible';
+        emptyState.innerHTML = `
+            <i class="fa-solid fa-book-open"></i>
+            <p>${searchTerm ? t('noBooksFound') : t('noBooksAvailable')}</p>
+        `;
+        container.appendChild(emptyState);
+    } else {
+        container.appendChild(columns);
+    }
 }
 
 function handleSearch(event) {
