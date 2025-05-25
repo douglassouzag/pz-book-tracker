@@ -23,7 +23,7 @@ Um aplicativo web para rastrear e gerenciar sua coleção de livros do Project Z
 
 ## Como Usar
 
-1. Acesse diretamente o projeto em: [PZ Book Tracker](https://github.com/douglassouzag/pz-book-tracker)
+1. Acesse diretamente o projeto em: [PZ Book Tracker](https://douglassouzag.github.io/pz-book-tracker/)
 
 OU
 
