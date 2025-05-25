@@ -23,12 +23,16 @@ Um aplicativo web para rastrear e gerenciar sua coleção de livros do Project Z
 
 ## Como Usar
 
-1. Clone o repositório
+1. Acesse diretamente o projeto em: [PZ Book Tracker](https://github.com/douglassouzag/pz-book-tracker)
+
+OU
+
+2. Clone o repositório
 ```bash
-git clone https://github.com/glok/pz-book-tracker.git
+git clone https://github.com/douglassouzag/pz-book-tracker.git
 ```
 
-2. Abra o arquivo `index.html` em seu navegador
+3. Abra o arquivo `index.html` em seu navegador
 
 ## Funcionalidades
 
